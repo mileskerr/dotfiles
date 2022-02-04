@@ -1,0 +1,53 @@
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefaultk
+
+*.foreground:   #110f18
+*.background:   #d5d6db
+*.cursorColor:  #343b58
+
+! black
+*.color0:       #343b58
+*.color8:       #4d4d4d
+
+! red
+*.color1:       #8c4351
+*.color9:       #965027
+
+! green
+*.color2:       #485e30
+*.color10:      #33635c
+
+! yellow
+*.color3:       #8f5e15
+*.color11:      #8f5e15
+
+! blue
+*.color4:       #0f4b6e
+*.color12:      #34548a
+
+! magenta
+*.color5:       #5a4a78
+*.color13:      #343b58
+
+! cyan
+*.color6:       #166775
+*.color14:      #166775
+
+! white
+*.color7:       #9699a3
+*.color15:      #565a6e
+
+*.sel_fg: #d5d6db
+*.sel_bg: #0f4b6e
+*.warn_fg: #d5d6db
+*.warn_bg: #565a6e
+
+dwm.norm_bd: #d5d6db
+
+Xcursor.theme: Adwaita
+Xcursor.size:                     0

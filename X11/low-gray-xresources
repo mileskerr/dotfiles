@@ -1,0 +1,57 @@
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+!
+! Generated with :
+! XRDB2Xreources.py
+!
+*.foreground:  #cccccc
+*.background:  #353535
+*.cursorColor: #73635a
+!
+! Black
+*.color0:      #4d4d4d
+*.color8:      #202020
+!
+! Red
+*.color1:      #d09090
+*.color9:      #dca3a3
+!
+! Green
+*.color2:      #909970
+*.color10:     #709080
+!*.color10:     #c3bf9f
+!
+! Yellow
+*.color3:      #75909a
+*.color11:     #b0af7f
+!
+! Blue
+*.color4:      #607080
+*.color12:     #607080
+!
+! Magenta
+*.color5:      #94bff3
+*.color13:     #94bff3
+!
+! Cyan
+*.color6:      #7cb0c3
+*.color14:     #83c0c3
+!
+! White
+*.color7:      #dcdccc
+*.color15:     #ffffff
+!
+
+dwm.warn_fg: #dcdccc
+dwm.warn_bg: #4d4d4d
+dwm.sel_fg: #dcdccc
+dwm.sel_bg: #506070
+dwm.norm_bd: #4d4d4d
+
+Xcursor.theme: Adwaita
+Xcursor.size:                     0
