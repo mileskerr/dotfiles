@@ -1,0 +1,19 @@
+#!/bin/sh
+while read file
+do
+        case "$1" in
+        "w")
+        	convert $file ~/desktop/img/wallpapers/wall.png && xwallpaper --zoom ~/desktop/img/wallpapers/wall.png && notify-send "set wallpaper"
+		;;
+	"C-c")
+		
+		if [[ $( echo $file | grep png ) != "" ]] ; then
+			xclip -sel clip -t image/png -i $file && \
+			notify-send "copied image"
+		else
+			convert $file /tmp/clip.png && \
+			xclip -sel clip -t image/png -i /tmp/clip.png && \
+			notify-send "copied image"
+		fi
+        esac
+done

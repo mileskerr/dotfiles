@@ -10,6 +10,10 @@ settings:
     global:
       normal:
         ;: scroll right
+        <Alt+c>: config-cycle -p -u *://{url:host}/* content.cookies.accept no-3rdparty
+          never;; reload
+        <Alt+j>: config-cycle -p -u *://{url:host}/* content.javascript.enabled ;;
+          reload
         H: back
         J: forward
         K: tab-prev
@@ -17,6 +21,7 @@ settings:
         j: scroll left
         k: scroll down
         l: scroll up
+        m: null
         q: null
   colors.statusbar.command.private.bg:
     global: darkslategray
@@ -30,6 +35,16 @@ settings:
     global: true
   content.blocking.method:
     global: both
+  content.cookies.accept:
+    '*://accounts.spotify.com/*': no-3rdparty
+    '*://developer.spotify.com/*': no-3rdparty
+    '*://github.com/*': no-3rdparty
+    '*://jr0.org/*': no-3rdparty
+    '*://www.pinterest.com/*': no-3rdparty
+    '*://www.youtube.com/*': no-3rdparty
+    https://discord.com/login: no-3rdparty
+    https://www.reddit.com/: all
+    https://www.reddit.com/login/?dest=https%3A%2F%2Fwww.reddit.com%2Fr%2Fqutebrowser%2F: no-3rdparty
   content.cookies.store:
     global: true
   content.headers.accept_language:
@@ -39,6 +54,23 @@ settings:
       accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
   content.headers.user_agent:
     global: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+  content.javascript.enabled:
+    '*://*.duckduckgo.com/*': true
+    '*://accounts.spotify.com/*': true
+    '*://boards.4chan.org/*': true
+    '*://developer.spotify.com/*': true
+    '*://github.com/*': true
+    '*://jr0.org/*': true
+    '*://www.pinterest.com/*': true
+    '*://www.reddit.com/*': true
+    '*://www.youtube.com/*': true
+    file:///*: true
+    http://jr0.org/links.html: false
+    https://boards.4chan.org/wg/thread/7855224#p7864170: true
+    https://discord.com/app: true
+    https://discord.com/login: true
+    https://www.pinterest.com/: false
+    https://www.reddit.com/: true
   content.notifications.enabled:
     https://pdf.wondershare.com: false
     https://www.reddit.com: false

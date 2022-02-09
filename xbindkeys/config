@@ -54,15 +54,15 @@
   XF86MonBrightnessDown
 
 #music player
-"mpc next"
+"playerctl next"
   XF86AudioNext
-"mpc prev"
+"playerctl previous"
   XF86AudioPrev
-"mpc toggle"
+"playerctl play-pause"
   XF86AudioPlay
-"mpc next"
+"playerctl next"
   Mod4+N
-"mpc toggle"
+"playerctl play-pause"
   Mod4+T
 "change_vol +5 media"
   Mod4+Insert

@@ -46,6 +46,7 @@ Xft.lcdfilter: lcddefaultk
 *.sel_bg: #a277ff
 *.warn_fg: #edecee
 *.warn_bg: #35336d
+*.light_bg: #35334d
 
 dwm.norm_bd: #110f18
 

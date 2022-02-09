@@ -3,15 +3,23 @@ config.load_autoconfig()
 
 
 #c.content.cookies.accept = 'no-3rdparty'
-c.content.cookies.accept = 'no-3rdparty'
-config.set('content.cookies.accept', 'never', '*://facebook.com/*')
+c.content.cookies.accept = 'never'
+c.content.javascript.enabled = False
 
-config.set('content.cookies.accept', 'no-3rdparty', '*://reddit.com/*')
-config.set('content.cookies.accept', 'no-3rdparty', '*://google.com/*')
-config.set('content.cookies.accept', 'no-3rdparty', '*://youtube.com/*')
+#use tCh to permenantly enable cookies per domain
+#use tSh to permenantly enable javascript per domain
+#or these:
+config.bind('<Alt-j>', 'config-cycle -p -u *://{url:host}/* content.javascript.enabled ;;reload')
+config.bind('<Alt-c>', 'config-cycle -p -u *://{url:host}/* content.cookies.accept no-3rdparty never;; reload')
+
+config.bind('<m>', 'quickmark-save')
+config.bind('O', 'set-cmd-text -s :open -t')
+config.bind('Q', 'spawn copy_qb_quickmarks')
+config.bind('Y', "spawn mpv -fs {url} ;;process ;;later 2s back")
+config.bind('yf', "hint links spawn mpv -fs {hint-url}")
 
 
-
+#config.set('content.user_stylesheets', '~/.config/discordrecolor/discordrecolor.css', '*://discord.com/*')
 
 
 #colors:
@@ -31,7 +39,7 @@ dark = xresources['*.background']
 light = xresources['*.foreground']
 
 
-black = xresources['*.color0']
+black = xresources['*.warn_bg']
 red = xresources['*.color1']
 green = xresources['*.color2']
 yellow = xresources['*.color3']
@@ -74,7 +82,7 @@ c.colors.completion.even.bg = dark
 ## Text color of the completion widget. May be a single color to use for
 ## all columns or a list of three colors, one for each column.
 ## Type: List of QtColor, or QtColor
-c.colors.completion.fg = [light, 'white', 'white']
+c.colors.completion.fg = light
 
 ## Background color of the selected completion item.
 ## Type: QssColor

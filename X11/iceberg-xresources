@@ -12,11 +12,11 @@ Xft.lcdfilter: lcddefaultk
 *.cursorColor:  #c6c8d1
 
 ! black
-*.color0:       #1e2132
+*.color0:       #2e3148
 *.color8:       #6b7089
 
 ! red
-*.color1:       #e27878
+*.color1:       #e26878
 *.color9:       #e98989
 
 ! green
@@ -28,7 +28,7 @@ Xft.lcdfilter: lcddefaultk
 *.color11:      #e9b189
 
 ! blue
-*.color4:       #84a0c6
+*.color4:       #5470a9
 *.color12:      #91acd1
 
 ! magenta
@@ -36,17 +36,18 @@ Xft.lcdfilter: lcddefaultk
 *.color13:      #ada0d3
 
 ! cyan
-*.color6:       #89b8c2
+*.color6:       #5988a2
 *.color14:      #95c4ce
 
 ! white
 *.color7:       #c6c8d1
 *.color15:      #d2d4de
 
-*.sel_fg: #161821
-*.sel_bg: #84a0c6
+*.sel_fg: #c6c8d1
+*.sel_bg: #5470a9
 *.warn_fg: #c6c8d1
-*.warn_bg: #6b7089
+*.warn_bg: #1e2132
+*.light_bg: #2e3148 
 
 dwm.norm_bd: #110f18
 

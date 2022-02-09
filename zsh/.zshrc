@@ -1,7 +1,7 @@
 
 ###########HISTORY###########
 
-HISTFILE=~/.local/state/zsh/zsh_history
+HISTFILE="$XDG_STATE_HOME/zsh/zsh_history"
 HISTSIZE=1000
 SAVEHIST=1000
 
@@ -73,5 +73,5 @@ export PS1="${SCHEME1}%~ $RESET "
 
 ###########ALIASES###########
 
-source ~/.rc
+source "$XDG_CONFIG_HOME/sh/aliases"
 
