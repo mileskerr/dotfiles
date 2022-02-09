@@ -1,0 +1,89 @@
+###########################
+# xbindkeys configuration #
+###########################
+
+# A list of keys is in /usr/include/X11/keysym.h and in
+# /usr/include/X11/keysymdef.h
+# The XK_ is not needed.
+#
+# List of modifier:
+#   Release, Control, Shift, Mod1 (Alt), Mod2 (NumLock),
+#   Mod3 (CapsLock), Mod4, Mod5 (Scroll).
+#
+
+# The release modifier is not a standard X modifier, but you can
+# use it if you want to catch release events instead of press events
+
+
+#-------------------------------------------------------#
+#                       COMMANDS:                       #
+#-------------------------------------------------------#
+
+#start apps:
+"exec $TERM"
+  Mod4 + Return
+"exec $BROWSER"
+  Mod4 + F2
+"exec $TERM -e ranger"
+  Mod4 + F3
+"exec discord"
+  Mod4 + F4
+"exec $TERM -e ncmpcpp && mpc random on"
+  Mod4 + F5
+
+
+#screenshots
+"import /tmp/ss.png && xclip -sel clip -t image/png -i /tmp/ss.png"
+  Print
+"save_meme"
+  Mod4+m
+
+
+
+#volume
+"change_vol +3 system"
+  XF86AudioRaiseVolume
+"change_vol -3 system"
+  XF86AudioLowerVolume 
+
+
+#backlight
+"change_backlight +10"
+  XF86MonBrightnessUp
+"change_backlight -10"
+  XF86MonBrightnessDown
+
+#music player
+"playerctl next"
+  XF86AudioNext
+"playerctl previous"
+  XF86AudioPrev
+"playerctl play-pause"
+  XF86AudioPlay
+"playerctl next"
+  Mod4+N
+"playerctl play-pause"
+  Mod4+T
+"change_vol +5 media"
+  Mod4+Insert
+"change_vol -5 media"
+  Mod4+Pause
+
+#dwm
+"d_exit"
+  Mod4+0
+"killall dwm && sleep 2 && exec dwm"
+  Mod4+Shift+R
+"killall sleeper"
+  Mod4+Shift+E
+
+
+
+
+
+
+
+
+
+
+

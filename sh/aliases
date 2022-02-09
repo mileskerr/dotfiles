@@ -1,0 +1,30 @@
+# vim: set filetype=bash:
+
+
+
+#aliases
+alias vim="nvim"
+alias ls='ls -A --color=auto'
+alias lsa='ls'
+alias cp="cp -i"
+alias df='df -h'
+alias free='free -m'
+alias du='du -h'
+alias more='less'
+alias sxiv='sxiv -a'
+alias xbindkeys='xbindkeys -f ~/.config/xbindkeys/config'
+
+
+alias x='cd $HOME/.config/X11'
+alias c='cd $HOME/.config'
+alias z='cd $HOME/.config/zsh'
+alias d='cd $HOME/desktop'
+alias dm='cd $HOME/desktop/memes'
+alias dmi='cd $HOME/desktop/memes/image'
+alias dmv='cd $HOME/desktop/memes/video'
+alias r='cd $HOME/desktop/repos/'
+alias rd='cd $HOME/desktop/repos/dwm'
+alias a='cd $HOME/desktop/art/'
+alias s='cd $HOME/.scripts/'
+alias sst='cd $HOME/.scripts/status'
+alias rdb='cd $HOME/desktop/repos/dwmblocks'
