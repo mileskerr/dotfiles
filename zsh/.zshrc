@@ -71,6 +71,9 @@ RESET="%{$(tput sgr0)%}"
 #square ps1:
 export PS1="${SCHEME1}%~ $RESET "
 
+#gpg tty
+export GPG_TTY=$(tty)
+
 ###########ALIASES###########
 
 source "$XDG_CONFIG_HOME/sh/aliases"

@@ -14,7 +14,6 @@ config.bind('<Alt-c>', 'config-cycle -p -u *://{url:host}/* content.cookies.acce
 
 config.bind('<m>', 'quickmark-save')
 config.bind('O', 'set-cmd-text -s :open -t')
-config.bind('Q', 'spawn copy_qb_quickmarks')
 config.bind('Y', "spawn mpv -fs {url} ;;process ;;later 2s back")
 config.bind('yf', "hint links spawn mpv -fs {hint-url}")
 

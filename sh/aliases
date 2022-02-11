@@ -3,6 +3,9 @@
 
 
 #aliases
+alias steam="STEAM_RUNTIME_PREFER_HOST_LIBRARIES=0 steam"
+
+
 alias vim="nvim"
 alias ls='ls -A --color=auto'
 alias lsa='ls'

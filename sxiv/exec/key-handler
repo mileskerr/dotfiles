@@ -3,7 +3,7 @@ while read file
 do
         case "$1" in
         "w")
-        	convert $file ~/desktop/img/wallpapers/wall.png && xwallpaper --zoom ~/desktop/img/wallpapers/wall.png && notify-send "set wallpaper"
+        	convert $file ~/desktop/img/walls/wall.png && xwallpaper --zoom ~/desktop/img/walls/wall.png && notify-send "set wallpaper"
 		;;
 	"C-c")
 		

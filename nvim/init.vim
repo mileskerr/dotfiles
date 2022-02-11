@@ -30,7 +30,7 @@ nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 
 noremap <C-c> :let @+=@"<CR>
-noremap <C-v> "+p
+" noremap <C-S-v> "+p
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
