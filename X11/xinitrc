@@ -13,7 +13,7 @@ xrandr --setprovideroutputsource -0x1ff NVIDIA-0
 xrandr --auto
 
 #set wallpaper
-xwallpaper --zoom ~/desktop/img/wall/wall.png
+xwallpaper --zoom ~/desktop/img/walls/wall.png
 #xsetroot -solid '#000000'
 
 check_bat &
