@@ -2,102 +2,124 @@
 <html>
 <head>
 <title>new tab</title>
-<style>
-	section {
-		display: flex;
-		justify-conent: center;
-		align-items: center;
-		padding: 30px
-	}
-	p {
-		color: %clfg%;
-		padding: 2px;
-		margin: 6px;
-		font-size:	13px;
-		line-height: 13px;
-		
-		text-decoration: none;
-	}
-	a {
-		color: %clfg%;
-		text-decoration: none;
-	}
-	a:hover {
-		color: %clsel_bg%;
-	}
-	.box {
-		margin-left: auto;
-		margin-right: auto;
-		position: relative;
-		margin-top: margin-left;
-		border: 1px solid %clwarn_bg%;
-		border-radius: 4px;
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
-	.sidebar {
-		padding: 6px;
-		min-width: 240px;
-	}
-	.wall {
-		margin-bottom: -4px;
-		padding: 0px;
-		right:0px;
-		border-radius: 4px;
-		max-width: 100%;
-		max-height: 900px;
-	}
-</style>
+	<style>
+		body {
+			height: 100vh;
+			width: 100%;
+			background-color: %clfg%;
+		}
+		p {
+			color: %clfg%;
+			padding: 2px;
+			margin: 6px;
+			font-size:	13px;
+			line-height: 13px;
+			
+			text-decoration: none;
+		}
+		a {
+			color: %clg14%;
+			text-decoration: none;
+		}
+		a:hover {
+			color: %clsel_bg%;
+		}
+		hr {
+			width: 100%;
+			border: none;
+			height: 1px;
+			background-color: %clwarn_bg%;
+		}
+		::placeholder {
+			color: %clg12%;
+		}
+		input[type=text] {
+			all: unset;
+			padding: 4px 8px;
+			margin: 0px 0px;
+			width: 100%;
+			border-radius: 0px;
+			border-bottom: 1px solid %clwarn_bg%;
+			color: %clfg%;
+			box-sizing: border-box
+		}
+		.box {
+			margin: 0;
+			postition: absolute;
+			width: 80%;
+		   	height: 80%;
+			/*translation = (1/height)*((1-height)/2)*/
+		   	transform: translate(12.5%, 12.5%);
+			border: 1px solid %clwarn_bg%;
+			border-radius: 4px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+		.sidebar {
+			min-width: 240px;
+		}
+		.wall {
+			/*margin-bottom: -4px;*/
+			position: relative;
+			height: 100%;
+			width: 100%;
+			border-radius: 4px;
+			background-postition: center center;
+			background-size: cover;
+			background-image: url('file:///home/milo/desktop/img/walls/wall.png');
+		}
+	</style>
 </head>	
 <body style="background-color:%clbg%;margin:0px;font-family:monospace;">
-<script type="text/javascript">
-	window.onload = function () {
-		DisplayCurrentTime();
-	};
-	function DisplayCurrentTime() {
-		var date = new Date();
-		var hours = date.getHours() > 12 ? date.getHours()-12 : date.getHours();
-		var am_pm = date.getHours() >= 12 ? "pm" : "am";
-		hours = hours < 10 ? "0" + hours : hours;
-		var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-		time = hours + ":" + minutes + "" + am_pm;
-		var lblTime = document.getElementById("lblTime");
-		lblTime.innerHTML = '<p>'+time+'</p>';
-	};
-	function getQuickmarks() {
-		var bookmarks = this.responseText;
-		let links = createLinks(bookmarks);
-		document.getElementById("quickmarks").innerHTML = links;
-	};
-	function createLinks(str) {
-		const lines = str.split("\n");
-		const links = []
-		lines.forEach(function(line) {
-			const words = line.split(" ");
-			var url = words[words.length - 1];
-			var name = words.slice(0, words.length - 1).join(" ");
-			var html = '<p><a href=\"'+url+'\">'+name+'</a></p>'
-			links.push(html)
-		});
-		return links.join("\n");
-	};
-	var hrq = new XMLHttpRequest();
-	hrq.addEventListener("load", getQuickmarks);
-	hrq.open("GET", "quickmarks");
-	hrq.send();
-</script>
-<section>
+	<script type="text/javascript">
+		window.onload = function () {
+			DisplayCurrentTime();
+		};
+		function DisplayCurrentTime() {
+			var date = new Date();
+			var hours = date.getHours() > 12 ? date.getHours()-12 : date.getHours();
+			var am_pm = date.getHours() >= 12 ? "pm" : "am";
+			hours = hours < 10 ? "0" + hours : hours;
+			var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+			time = hours + ":" + minutes + "" + am_pm;
+			var lblTime = document.getElementById("lblTime");
+			lblTime.innerHTML = '<p>'+time+'</p>';
+		};
+		function getQuickmarks() {
+			var bookmarks = this.responseText;
+			let links = createLinks(bookmarks);
+			document.getElementById("quickmarks").innerHTML = links;
+		};
+		function createLinks(str) {
+			const lines = str.split("\n");
+			const links = []
+			lines.forEach(function(line) {
+				const words = line.split(" ");
+				var url = words[words.length - 1];
+				var name = words.slice(0, words.length - 1).join(" ");
+				var html = '<p><a href=\"'+url+'\">'+name+'</a></p>'
+				links.push(html)
+			});
+			return links.join("\n");
+		};
+		var hrq = new XMLHttpRequest();
+		hrq.addEventListener("load", getQuickmarks);
+		hrq.open("GET", "quickmarks");
+		hrq.send();
+	</script>
 	<div class="box">
 		<div class="sidebar">
 			<span id="lblTime"></span>
+			<form method="get" action="https://duckduckgo.com">
+				<input type="text" name="q" maxlength="255" value="" placeholder="duckduckgo"/>
+			</form>
+			<form method="get" action="https://search.brave.com/search">
+				<input type="text" name="q" maxlength="255" value="" placeholder="brave"/>
+			</form>
 			<span id="quickmarks"></span>
 		</div>
-		<div style="height:100%;">
-			<img class="wall" src="file:///home/milo/desktop/img/walls/wall.png" alt="">
-		</div>
+		<div class="wall"></div>
 	</div>
-</section>
 </body>	
 </html>

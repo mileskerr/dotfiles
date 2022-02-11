@@ -1,6 +1,10 @@
 import subprocess
 config.load_autoconfig()
 
+c.tabs.position = 'top'
+c.statusbar.position = 'bottom'
+c.search.ignore_case = 'always'
+c.colors.webpage.preferred_color_scheme = 'dark'
 
 #c.content.cookies.accept = 'no-3rdparty'
 c.content.cookies.accept = 'never'
@@ -16,7 +20,6 @@ config.bind('<m>', 'quickmark-save')
 config.bind('O', 'set-cmd-text -s :open -t')
 config.bind('Y', "spawn mpv -fs {url} ;;process ;;later 2s back")
 config.bind('yf', "hint links spawn mpv -fs {hint-url}")
-
 
 #config.set('content.user_stylesheets', '~/.config/discordrecolor/discordrecolor.css', '*://discord.com/*')
 
@@ -374,11 +377,11 @@ c.colors.statusbar.url.warn.fg = yellow
 
 ## Background color of the tab bar.
 ## Type: QssColor
-c.colors.tabs.bar.bg = dark
+c.colors.tabs.bar.bg = warn_bg
 
 ## Background color of unselected even tabs.
 ## Type: QtColor
-c.colors.tabs.even.bg = dark
+c.colors.tabs.even.bg = warn_bg
 
 ## Foreground color of unselected even tabs.
 ## Type: QtColor
@@ -407,7 +410,7 @@ c.colors.tabs.indicator.system = 'rgb'
 
 ## Background color of unselected odd tabs.
 ## Type: QtColor
-c.colors.tabs.odd.bg = dark
+c.colors.tabs.odd.bg = warn_bg
 
 ## Foreground color of unselected odd tabs.
 ## Type: QtColor
@@ -435,7 +438,7 @@ c.colors.tabs.pinned.selected.even.bg = sel_bg
 
 ## Foreground color of pinned selected even tabs.
 ## Type: QtColor
-c.colors.tabs.pinned.selected.even.fg = dark
+c.colors.tabs.pinned.selected.even.fg = light
 
 ## Background color of pinned selected odd tabs.
 ## Type: QtColor
@@ -443,11 +446,11 @@ c.colors.tabs.pinned.selected.odd.bg = sel_bg
 
 ## Foreground color of pinned selected odd tabs.
 ## Type: QtColor
-c.colors.tabs.pinned.selected.odd.fg = dark
+c.colors.tabs.pinned.selected.odd.fg = light
 
 ## Background color of selected even tabs.
 ## Type: QtColor
-c.colors.tabs.selected.even.bg = sel_bg
+c.colors.tabs.selected.even.bg = dark
 
 ## Foreground color of selected even tabs.
 ## Type: QtColor
@@ -455,7 +458,7 @@ c.colors.tabs.selected.even.fg = light
 
 ## Background color of selected odd tabs.
 ## Type: QtColor
-c.colors.tabs.selected.odd.bg = sel_bg
+c.colors.tabs.selected.odd.bg = dark
 
 ## Foreground color of selected odd tabs.
 ## Type: QtColor
