@@ -54,15 +54,15 @@
   XF86MonBrightnessDown
 
 #music player
-"playerctl next"
+"playerctl --player=spotify next"
   XF86AudioNext
-"playerctl previous"
+"playerctl --player=spotify previous"
   XF86AudioPrev
-"playerctl play-pause"
+"playerctl --player=spotify play-pause"
   XF86AudioPlay
-"playerctl next"
+"playerctl --player=spotify next"
   Mod4+N
-"playerctl play-pause"
+"playerctl --player=spotify play-pause"
   Mod4+T
 "change_vol +5 media"
   Mod4+Insert

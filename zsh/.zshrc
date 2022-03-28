@@ -4,6 +4,7 @@
 HISTFILE="$XDG_STATE_HOME/zsh/zsh_history"
 HISTSIZE=1000
 SAVEHIST=1000
+setopt HIST_IGNORE_DUPS
 
 ###########AUTOCOMPLETION###########
 

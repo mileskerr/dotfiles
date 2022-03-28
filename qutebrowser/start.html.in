@@ -117,6 +117,12 @@
 			<form method="get" action="https://search.brave.com/search">
 				<input type="text" name="q" maxlength="255" value="" placeholder="brave"/>
 			</form>
+			<form method="get" action="https://searx.xyz/search">
+				<input type="text" name="q" maxlength="255" value="" placeholder="searX"/>
+			</form>
+			<form method="get" action="https://google.com/search">
+				<input type="text" name="q" maxlength="255" value="" placeholder="google"/>
+			</form>
 			<span id="quickmarks"></span>
 		</div>
 		<div class="wall"></div>

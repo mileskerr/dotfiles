@@ -50,7 +50,6 @@ Xft.lcdfilter: lcddefaultk
 *.sel_bg: nord10
 *.warn_fg: nord6
 *.warn_bg: nord3
-*.light_bg: nord3
 
 dwm.norm_bd: nord0
 
