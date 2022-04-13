@@ -102,8 +102,8 @@ augroup END
 
 "word processor
 func! WordProcessor()
-  map k gj
-  map l gk
+  map k gk
+  map l gl
   set wrap
   setlocal formatoptions=1
   setlocal spell spelllang=en_us  
