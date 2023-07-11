@@ -1,0 +1,9 @@
+#!/bin/sh
+case "$(nmcli radio wifi)" in
+    "enabled")
+        echo "true"
+        ;;
+    *)
+        echo "false"
+        ;;
+esac

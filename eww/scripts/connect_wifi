@@ -1,0 +1,20 @@
+#!/bin/sh
+
+network_to_connect=$1
+password=""
+if [[ $2 ]]; then
+	password="password $2"
+fi
+
+eww open enterpswd ;
+eww update connecting=true ;
+nmcli device wifi connect "$network_to_connect" $password > ~/.cache/eww-connect-result && \
+eww update con_success=true || \
+eww update con_failure=true ;
+eww update connecting=false ;
+$XDG_CONFIG_HOME/eww/scripts/refresh_network ;
+sleep 3 ;
+eww update con_success=false ;
+eww update con_failure=false ;
+eww update connecting=false ;
+eww close enterpswd ;

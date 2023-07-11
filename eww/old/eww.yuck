@@ -1,0 +1,160 @@
+(defwidget container [?halign ?class ?spacing ?width]
+    (box
+        :width width
+        :spacing spacing
+        :class {class ?: "container"}
+        :halign {halign ?: "right"}
+        :orientation "h"
+        :space-evenly false
+        (children)
+    )
+)
+
+(defpoll time :interval "10s"
+    `date '+%-I:%M'`
+)
+
+
+(defwidget label-scale [amount command ?width ?label ?hide-percent ?class]
+    (container
+        { "${ hide-percent ?: false }" ? label : "${label} ${amount}%"}
+        (scale
+            :class class
+            :width { width ?: 100 }
+            :orientation "h"
+            :valign "center"
+            :value amount
+            :min 0
+            :max 100
+            :onchange command
+        )
+    )
+)
+(deflisten volume :initial 0
+    `pactl subscribe | grep --line-buffered "sink" | listener get_volume`
+)
+(defwidget volume []
+    (label-scale
+        :amount volume
+        :command 'change_vol {}'
+        :label "Vol"
+    )
+)
+
+
+(defwidget label_progress [amount ?width ?label ?hide-percent ?class]
+    (container
+        { "${ hide-percent ?: false }" ? label : "${label} ${amount}%"}
+        (progress
+            :class class
+            :width { width ?: 100 }
+            :orientation "h"
+            :valign "center"
+            :value amount
+            :min 0
+            :max 100
+        )
+    )
+)
+
+
+(defwidget battery []
+    (label_progress
+        :amount {EWW_BATTERY["BAT0"].capacity}
+        :width 50
+        :class {EWW_BATTERY["BAT0"].capacity < 10 ?
+            "low-battery" :
+            EWW_BATTERY["BAT0"].status == "Discharging" ? "discharging" : "charging"
+        }
+    )
+)
+(defwidget cpu []
+    (label_progress
+        :label "CPU"
+        :amount {round(EWW_CPU.avg,1)}
+        :width 100
+        :class {EWW_CPU.avg < 40 ?
+            "good" :
+            EWW_CPU.avg < 80 ? "ok" : "bad"
+        }
+    )
+)
+(defwidget ram []
+    (label_progress
+        :hide-percent true
+        :label "RAM ${round(EWW_RAM.used_mem / 1073741824,2)}/${round(EWW_RAM.total_mem / 1073741824,2)}"
+        :amount {EWW_RAM.used_mem_perc}
+        :width 100
+        :class {EWW_RAM.used_mem_perc < 40 ?
+            "good" :
+            EWW_CPU.avg < 80 ? "ok" : "bad"
+        }
+    )
+)
+
+
+(deflisten workspaces :initial ""
+    `xprop -spy -root _NET_CURRENT_DESKTOP | listener get_workspaces`
+)
+(defwidget xworkspaces []
+    (literal
+        :content workspaces
+    )
+)
+
+(defpoll network-name :interval "30s"
+    `nmcli -t -f NAME connection show --active | head -n1`
+)
+(defpoll interfaceId :interval "30s"
+    `route | grep default | head -n1 | awk '{print $8}'`
+)
+(defwidget network []
+    (container
+        :spacing 5
+        (container
+            :spacing 5
+            :halign "end"
+            :class "highlight"
+            (label :text "  " :class "mono")
+            (label :text "${network-name}")
+            ;(label :text "${round(EWW_NET[interfaceId].NET_UP / 1000, 1)}")
+            (label :text ""
+                :class {round(EWW_NET[interfaceId].NET_UP / 1000, 0) > 1 ? "uplink" : "noactive"}
+            )
+            ;(label :text "${round(EWW_NET[interfaceId].NET_DOWN / 1000, 1)}")
+            (label :text "" 
+                :class {round(EWW_NET[interfaceId].NET_DOWN / 1000, 1) > 1 ? "downlink" : "noactive"} 
+            )
+            
+        )
+    )
+)
+
+
+(defwindow bar
+    :monitor 0
+    :geometry (geometry :x "0%"
+    :y "3px"
+    :width 1914
+    :height 0
+    :anchor "top center")
+    :stacking "bg"
+    :reserve (struts :distance "20px" :side "top")
+    :windowtype "dock"
+    :wm-ignore false
+    (centerbox
+        :space-evenly false
+        (xworkspaces)
+        ""
+        (container :class "row"
+            :halign "end"
+            (cpu)
+            (ram)
+            (volume)
+            (battery)
+            (network)
+            time
+        )
+            
+    )
+)

@@ -1,0 +1,9 @@
+#!/bin/sh
+LOCK_FILE="$HOME/.cache/eww-refresh-network.lock"
+if ! [ -e "$LOCK_FILE" ]; then
+	touch "$LOCK_FILE"
+	$HOME/.config/eww/scripts/active_net > $HOME/.cache/eww-active-net
+	$HOME/.config/eww/scripts/wifi_list >> $HOME/.cache/eww-wifi-list
+	$HOME/.config/eww/scripts/active_net >> $HOME/.cache/eww-active-net
+	rm "$LOCK_FILE"
+fi

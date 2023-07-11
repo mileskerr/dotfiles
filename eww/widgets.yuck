@@ -1,0 +1,310 @@
+(deflisten workspaces_0 :initial ""
+    `xprop -spy -root _NET_CURRENT_DESKTOP | listener "get_workspaces eDP-1-0"`
+)
+(deflisten workspaces_1 :initial ""
+    `xprop -spy -root _NET_CURRENT_DESKTOP | listener "get_workspaces HDMI-0"`
+)
+(defwidget xworkspaces [monitor]
+    (literal
+        :content { monitor == 0 ?
+        `(
+            box :class 'workspaces' :valign 'start' :halign 'center' :orientation 'v' :spacing 5 :space-evenly false 
+            ${workspaces_0}
+        )` : `(
+            box :class 'workspaces' :valign 'start' :halign 'center' :orientation 'v' :spacing 5 :space-evenly false 
+            ${workspaces_1}
+        )`
+        }
+    )
+)
+
+(defpoll time-l1 :interval "10s" `date '+%0I'`)
+(defpoll time-l2 :interval "10s" `date '+%0M'`)
+(defwidget time []
+    (box :orientation 'v'
+        :space-evenly false
+        :valign "end"
+        (transform
+            :translate-y 3
+            (label :text time-l1 )
+        )
+        (label :text time-l2 )
+    )
+)
+
+(defpoll date-l1 :interval "120s" `date '+%0m'`)
+(defpoll date-l2 :interval "10s" `date '+%0d'`)
+(defwidget date []
+    (box :orientation 'v'
+        :space-evenly false
+        :valign "end"
+        (transform
+            :translate-y 3
+            (label :text date-l1 )
+        )
+        (label :text time-l2 )
+    )
+)
+
+(defpoll n-updates :interval "60s" `checkupdates | wc -l`)
+(defwidget updates []
+    (box
+        :style "min-width: 24px"
+        :class "highlight"
+        :orientation 'v'
+        :halign "center"
+        :space-evenly false
+        (transform
+            :translate-x "-1px"
+            (label :text '' :class 'mono')
+        )
+        (label :text "${n-updates}")
+    )
+)
+
+(defwidget battery []
+    (box
+        :orientation 'v'
+        :space-evenly false
+        :valign "end"
+        (transform
+            :translate-y 3
+            "${EWW_BATTERY["BAT0"].capacity}"
+        )
+        (progress
+            :class {EWW_BATTERY["BAT0"].capacity < 10 ?
+                "low-battery" :
+                EWW_BATTERY["BAT0"].status == "Discharging" ? "discharging" : "charging"
+            }
+            :halign "center"
+            :width 20
+            :height 7
+            :orientation "h"
+            :value {EWW_BATTERY["BAT0"].capacity}
+            :min 0
+            :max 100
+        )
+    )
+)
+
+(defwidget system []
+    (box
+        :orientation 'h'
+        :valign "end"
+        :halign "center"
+        :spacing 5
+        (progress
+            :class {EWW_CPU.avg < 40 ?
+                "good" :
+                EWW_CPU.avg < 80 ? "ok" : "bad"
+            }
+            :value {EWW_CPU.avg}
+            :orientation "v"
+            :flipped true
+            :height 40
+            :min 0
+            :max 100
+        )
+        (progress
+            :class {EWW_RAM.used_mem_perc < 40 ?
+                "good" :
+                EWW_CPU.avg < 80 ? "ok" : "bad"
+            }
+            :amount {EWW_RAM.used_mem_perc}
+            :orientation "v"
+            :flipped true
+            :height 40
+            :min 0
+            :max 100
+        )
+    )
+)
+
+; (defpoll network-name :interval "30s"
+;     `nmcli -t -f NAME connection show --active | head -n1`
+; )
+; (defpoll network-type :interval "2s"
+;     `nmcli -t -f TYPE connection show --active | head -n1`
+; )
+(deflisten active_net :initial "" "tail -f -n1 ~/.cache/eww-active-net")
+(defpoll interface_id :interval "10s" `route | grep default | head -n1 | awk '{print $8}'`)
+
+(defwidget network []
+    (eventbox
+        :class "bar_button"
+        :onclick "scripts/refresh_network & scripts/popup net"
+        (box
+            :style "min-width: 24px"
+            :orientation 'v'
+            :halign "center"
+            :space-evenly false
+            (transform
+                :translate-x '-1'
+                (label
+                    :class 'mono'
+                    :text {active_net.symbol}
+                    ;:text {network-type == "802-11-wireless" ? network-type == "802-3-ethernet" ? '󰱓' : '' : '󰲛' }
+                )
+            )
+            (box
+                :width 20
+                :orientation 'h'
+                (label :text "󱞽"
+                    :class {((EWW_NET[interface_id].NET_UP ?: 0)/ 1000) > 1 ? "uplink" : "noactive"}
+                )
+                (label :text "󱞣" 
+                    :class {((EWW_NET[interface_id].NET_DOWN ?: 0)/ 1000) > 1 ? "downlink" : "noactive"} 
+                )
+            
+            )
+        )
+    )
+)
+
+(deflisten wifi_list :initial "" "tail -f -n1 ~/.cache/eww-wifi-list")
+(defvar network_to_connect "")
+(defvar connecting false)
+(defvar con_success false)
+(defvar con_failure false)
+(defpoll wifi_enabled :interval "5s" "scripts/wifi_enabled")
+
+(defwidget password_entry []
+    (overlay
+        (centerbox
+            :class "popup"
+            :space-evenly false
+            (label 
+                :halign "start"
+                :text "password: "
+            )
+            ""
+            (input
+                :password "true"
+                :halign "end"
+                :class "inputbox"
+                :timeout "30s"
+                :onaccept "scripts/connect_wifi '${network_to_connect}' '{}' &"
+            )
+        )
+        (revealer
+            :duration "200ms"
+            :transition "slideleft"
+            :reveal connecting
+            (box
+                :class "popup"
+                "connecting..."
+            )
+        )
+        (revealer
+            :duration 0
+            :reveal con_success
+            (box
+                :class "popup"
+                "successfully connected"
+            )
+        )
+        (revealer
+            :duration 0
+            :reveal con_failure
+            (box
+                :class "popup"
+                "failed to connect"
+            )
+        )
+    )
+)
+(defwidget wifi_switch []
+    (eventbox
+        :onclick "scripts/toggle_wifi &"
+        (box
+            :space-evenly "false"
+            (label
+                :halign "start"
+                :text "Wi-Fi: "
+            )
+            (overlay
+                (revealer
+                    :reveal wifi_enabled
+                    (box
+                        :class "highlight"
+                        :width 30
+                        (box
+                            :class "sel"
+                            :width 15
+                            :halign "end"
+                        )
+                    )
+                )
+                (revealer
+                    :reveal {!wifi_enabled}
+                    (box
+                        :class "highlight"
+                        :width 30
+                        (box
+                            :class "desel"
+                            :width 15
+                            :halign "start"
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+(defwidget network_popup []
+    (box
+        :class "popup"
+        :orientation 'v'
+        :space-evenly false
+        :spacing 5
+        (centerbox
+            :valign "start"
+            ;:orientation "h"
+            :class "highlight"
+            :style "padding-left: 5; padding-right: 10"
+            (label
+                :halign "start"
+                :text {active_net.name}
+            )
+            ""
+            (label
+                :halign "end"
+                :text {active_net.signal?:active_net.symbol}
+            )
+            
+        )
+        (wifi_switch)
+        (scroll
+            :class "list"
+            :style "padding: 5;"
+            :height 270
+            (box
+                :orientation 'v'
+                :space-evenly false
+                (for loading in {wifi_list.loading}
+                    (label :text {loading})
+                )
+                (for network in {wifi_list.list}
+                    (eventbox
+                        :class "wifi_list_button"
+                        :onclick "eww open enterpswd && eww update network_to_connect='${network.ssid}'"
+                        (centerbox
+                            :orientation "h"
+                            :style "padding-left: 5; padding-right: 10"
+                            (label
+                                :halign "start"
+                                :text {network.ssid}
+                            )
+                            ""
+                            (label
+                                :class "mono"
+                                :halign "end"
+                                :text {network.status}
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)

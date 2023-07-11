@@ -1,0 +1,41 @@
+#!/bin/sh
+if [[ "$(nmcli radio wifi)" == "disabled" ]]; then
+  printf "{ \"loading\": [], \"list\": [] }\n"
+  exit 0
+fi
+
+nmcli -t -f IN-USE,SSID,BARS,SECURITY device wifi list --rescan yes > /tmp/eww-wifi-list-nmcli-output &
+
+#throbber='▁▂▄▆▇██▇▆▄▂▁'
+throbber='▉▊▋▌▍▎▏▎▍▌▋▊▉'
+while [[ "$(jobs -l | grep "Running")" ]]; do
+  throbber="${throbber: -1}${throbber%?}"
+  printf "{ \"loading\": [\"${throbber:0:8}\"], \"list\": [] }\n"
+  sleep '0.05'
+done
+
+sleep '0.1'
+
+cons="$(cat /tmp/eww-wifi-list-nmcli-output)"
+echo $cons
+rm "/tmp/eww-wifi-list-nmcli-output"
+
+result="{ \"loading\": [], \"list\": ["
+
+IFS=$'\n'
+for l in $cons; do
+  IFS=':' read -r in_use ssid bars security <<< "$l"
+  if [ "$ssid" = "" ]; then
+    ssid="--"
+  fi
+  if [ "$in_use" = "*" ]; then
+    continue
+  fi
+  status="$bars"
+  if [ -n "$security" ]; then 
+    status=" $bars"
+  fi
+  result="$result{\"ssid\": \"$ssid\", \"status\": \"$status\"},"
+done
+
+printf "${result%,}]}\n"

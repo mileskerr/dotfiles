@@ -1,0 +1,122 @@
+
+$bg: %clbg%;
+$fg: %clfg%;
+$sel: %clsel_bg%;
+$green: %cl10%;
+$red: %cl1%;
+$teal: %cl14%;
+$yellow: %cl11%;
+$bg_alt: %clwarn_bg%;
+$bg_alt1: %cl0%;
+$inactive: %clg10%;
+
+* {
+    all: unset;
+}
+.bar {
+    font-family: "sans-serif";
+    font-size: 13px;
+    border-radius: 5px;
+    padding: 0px;
+    background-color: $bg;
+    color: $fg;
+}
+.wifi_list_button:hover {
+    color: $sel;
+}
+.popup {
+    font-family: "sans-serif";
+    font-size: 13px;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: %clg3%;
+    color: $fg;
+}
+.row {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.list {
+    border-radius: 4px;
+    background-color: $bg;
+    color: %clg14%;
+}
+.sel_ws {
+    border-radius: 4px;
+    min-width: 20px;
+    background-color: $bg_alt;
+}
+.active_ws {
+    min-width: 24px;
+}
+.inactive_ws {
+    min-width: 24px;
+    color: $inactive;
+}
+.highlight, .bar_button {
+    border-radius: 4px;
+    background-color: $bg_alt;
+}
+.bar_button:hover {
+    background-color: $sel;
+}
+.sel {
+    border-radius: 4px;
+    background-color: $sel;
+}
+.desel {
+    border-radius: 4px;
+    background-color: %clg10%;
+}
+.inputbox {
+    min-width: 20px;
+    border-radius: 4px;
+    background-color: $bg_alt;
+}
+.mono, .uplink, .downlink, .noactive {
+    font-family: "monospace";
+    font-size: 12px;
+}
+.uplink {
+    color: $green;
+}
+.downlink {
+    color: $red;
+}
+.noactive {
+    color: $fg;
+}
+.charging progress {
+    background-color: $green;
+}
+.low-battery progress {
+    background-color: $red;
+}
+.good progress {
+    background-color: $teal;
+}
+.ok progress {
+    background-color: $yellow;
+}
+.bad progress {
+    background-color: $red;
+}
+trough {
+    all:unset;
+    border-radius: 5px;
+    min-height: 5px;
+    min-width: 5px;
+    background-color: $bg_alt;
+    border-radius: 4px;
+}
+
+highlight, progress {
+    all:unset;
+    border-radius: 5px;
+    min-height: 5px;
+    min-width: 5px;
+    background-color: $sel;
+    border-radius: 4px;
+}

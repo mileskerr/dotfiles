@@ -1,0 +1,29 @@
+#!/bin/sh
+
+STATE_FILE="$HOME/.cache/eww-popup.state"
+
+if [[ $1 ]]; then
+	window_name=$1
+else
+	>&2 echo "no window specified"
+	exit 1
+fi
+
+if [[ ! `pidof eww` ]]; then
+	eww daemon
+	sleep 1
+fi
+
+current_window=`2>"/dev/null" cat $STATE_FILE`
+
+if [[ "$current_window" ]]; then
+	rm $STATE_FILE
+	eww close $current_window
+fi
+
+if [[ "$current_window" != "$window_name" ]]; then
+	eww open $window_name &&
+		touch $STATE_FILE ;\
+		echo $window_name > $STATE_FILE
+fi
+

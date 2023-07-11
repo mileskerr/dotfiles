@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [[ "$(nmcli radio wifi)" == 'enabled' ]]; then
+	eww update wifi_enabled=false
+	nmcli radio wifi off
+	#sleep 0.1
+	$XDG_CONFIG_HOME/eww/scripts/refresh_network
+else
+	eww update wifi_enabled=true
+	nmcli radio wifi on
+	sleep 0.1
+	$XDG_CONFIG_HOME/eww/scripts/refresh_network
+fi

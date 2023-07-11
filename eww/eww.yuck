@@ -1,0 +1,84 @@
+(include "widgets.yuck")
+
+
+(defwindow bar_1
+    :monitor "eDP-1-0"
+    :geometry (geometry
+        :x "3px"
+        :y "0px"
+        :width 24
+        :height 1074
+        :anchor "left center"
+    )
+    :stacking "bg"
+    :reserve (struts :distance "27px" :side "left")
+    :windowtype "dock"
+    :wm-ignore false
+    (bar :monitor 0)
+)
+(defwindow bar_2
+    :monitor "HDMI-0"
+    :geometry (geometry
+        :x "3px"
+        :y "0px"
+        :width 24
+        :height 2154
+        :anchor "left center"
+    )
+    :stacking "bg"
+    :reserve (struts :distance "27px" :side "left")
+    :windowtype "dock"
+    :wm-ignore false
+    (bar :monitor 1)
+)
+(defwidget bar [monitor]
+    (centerbox
+        :class 'bar'
+        :orientation 'v'
+        :space-evenly false
+        (xworkspaces
+            :monitor monitor
+        )
+        ""
+        (box
+            :class 'row'
+            :orientation 'v'
+            :space-evenly false
+            :valign "end"
+            :spacing 5
+            (updates)
+            (network)
+            (system)
+            (battery)
+            (date)
+            (time)
+        )
+    )
+)
+
+(defwindow enterpswd
+    :geometry (geometry
+        :x 33
+        :y -340
+        :anchor "left bottom"
+        :width 230
+        :height 20
+    )
+    :windowtype "dialog"
+    :wm-ignore "false"
+    :stacking "fg"
+    (password_entry)
+)
+(defwindow net
+    :geometry (geometry
+        :x 33
+        :y -6
+        :anchor "left bottom"
+        :width 230
+        :height 300
+    )
+    :windowtype "dialog"
+    :wm-ignore "true"
+    :stacking "fg"
+    (network_popup)
+)

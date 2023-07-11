@@ -1,0 +1,97 @@
+
+$bg: #2E3440;
+$fg: #D8DEE9;
+$sel: #5E81AC;
+$green: #A3BE8C;
+$red: #BF616A;
+$teal: #8FBCBB;
+$yellow: #EBCB8B;
+$bg_alt: #4C566A;
+$bg_alt1: #3B4252;
+$inactive: #6f7889;
+
+* {
+    all: unset;
+    font-family: "sans-serif";
+    font-size: 13px;
+}
+.bar {
+    border-radius: 5px;
+    padding: 0px;
+    background-color: $bg;
+    color: $fg;
+}
+.row {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.workspaces {
+}
+.sel_ws {
+    border-radius: 4px;
+    min-width: 24px;
+    background-color: $bg_alt;
+}
+.active_ws {
+    min-width: 24px;
+}
+.inactive_ws {
+    min-width: 24px;
+    color: $inactive;
+}
+.highlight {
+    border-radius: 4px;
+    background-color: $bg_alt;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+    margin-left: 3px;
+}
+
+.mono, .uplink, .downlink, .noactive {
+    font-family: "monospace";
+    font-size: 12px;
+}
+.uplink {
+    color: $green;
+}
+.downlink {
+    color: $red;
+}
+.noactive {
+    color: $fg;
+}
+.charging progress {
+    background-color: $green;
+}
+.low-battery progress {
+    background-color: $red;
+}
+.good progress {
+    background-color: $teal;
+}
+.ok progress {
+    background-color: $yellow;
+}
+.bad progress {
+    background-color: $red;
+}
+trough {
+    all:unset;
+    border-radius: 50px;
+    min-height: 5px;
+    min-width: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: $bg_alt;
+    border-radius: 10px;
+}
+
+highlight, progress {
+    all:unset;
+    border-radius: 50px;
+    min-height: 5px;
+    min-width: 5px;
+    background-color: $sel;
+    border-radius: 10px;
+}
