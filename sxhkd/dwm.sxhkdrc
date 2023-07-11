@@ -1,0 +1,5 @@
+super+shift+r
+    killall dwm && sleep 2 && exec dwm
+
+super + o
+    notify-send 'hello'

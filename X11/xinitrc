@@ -5,25 +5,28 @@ xrdb -merge $HOME/.config/X11/xresources
 
 
 #bind and remap keys
-xbindkeys -f ~/.config/xbindkeys/config
+#xbindkeys -f ~/.config/xbindkeys/config
+xmodmap ~/.config/X11/xmodmap
 remap_keys
 ksp_alt_check &
 
 xrandr --setprovideroutputsource -0x1ff NVIDIA-0
 xrandr --auto
+xrandr --output HDMI-0 --left-of eDP-1-0
 
 #set wallpaper
 xwallpaper --zoom ~/desktop/img/walls/wall.png
 #xsetroot -solid '#000000'
 
 check_bat &
-dunst &
 
-#exec awesome
+#execute sxhkd with common keybinds and wm-specific keybinds
+sxhkd -c "$XDG_CONFIG_HOME/sxhkd/common.sxhkdrc" "$([[ -f "$XDG_CONFIG_HOME/sxhkd/$WM.sxhkdrc" ]] && echo "$XDG_CONFIG_HOME/sxhkd/$WM.sxhkdrc")" &
+
+#start window manager
+exec $WM
 
 
-
-dwmblocks &
-picom &
-dwm &
-exec sleeper
+#dwmblocks &
+#dwm &
+#exec sleeper

@@ -47,9 +47,8 @@
 			margin: 0;
 			postition: absolute;
 			width: 80%;
-		   	height: 80%;
-			/*translation = (1/height)*((1-height)/2)*/
-		   	transform: translate(12.5%, 12.5%);
+		  height: 80%;
+	   	transform: translate(12.5%, 12.5%);
 			border: 1px solid %clwarn_bg%;
 			border-radius: 4px;
 			display: flex;
@@ -57,7 +56,14 @@
 			justify-content: space-between;
 		}
 		.sidebar {
+			display: flex;
+			flex-direction: column;
+			scrollbar-width: thin;
 			min-width: 240px;
+		}
+		.list {
+			height: 100%;
+			overflow: auto;
 		}
 		.wall {
 			/*margin-bottom: -4px;*/
@@ -73,6 +79,7 @@
 </head>	
 <body style="background-color:%clbg%;margin:0px;font-family:monospace;">
 	<script type="text/javascript">
+		var qb_quickmarks_path = "/home/milo/.config/qutebrowser/quickmarks"
 		window.onload = function () {
 			DisplayCurrentTime();
 		};
@@ -105,7 +112,7 @@
 		};
 		var hrq = new XMLHttpRequest();
 		hrq.addEventListener("load", getQuickmarks);
-		hrq.open("GET", "quickmarks");
+		hrq.open("GET", qb_quickmarks_path);
 		hrq.send();
 	</script>
 	<div class="box">
@@ -123,7 +130,9 @@
 			<form method="get" action="https://google.com/search">
 				<input type="text" name="q" maxlength="255" value="" placeholder="google"/>
 			</form>
-			<span id="quickmarks"></span>
+			<div class ="list">
+				<span id="quickmarks"></span>
+			</div>
 		</div>
 		<div class="wall"></div>
 	</div>

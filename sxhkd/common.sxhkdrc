@@ -1,0 +1,33 @@
+super + Return
+    $TERMINAL
+super + {F1, F2, F3, F4}
+    {$TERMINAL, $BROWSER, spotify, discord}
+
+Print
+    import /tmp/ss.png && xclip -sel clip -t image/png -i /tmp/ss.png
+
+XF86Audio{Raise,Lower}Volume
+    change_vol {+,-}3 system
+
+
+XF86MonBrightness{Up,Down}
+    change_backlight {+,-}10
+
+
+XF86Audio{Next,Prev,Play}
+    playerctl --player=spotify {next,previous,play-pause}
+super+{n,p,t}
+    playerctl --player=spotify {next,previous,play-pause}
+super+{Insert,Pause}
+    change_vol {+,-}5 media
+super+shift+{n,p}
+    playerctl --player=spotify position {+,-}10
+
+super+d
+    dmenu_launcher
+super+0
+    dmenu_exit
+
+super+shift+h
+    pkill -USR1 -x sxhkd && notify-send 'sxhkd reloaded'
+

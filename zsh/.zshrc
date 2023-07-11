@@ -2,8 +2,8 @@
 ###########HISTORY###########
 
 HISTFILE="$XDG_STATE_HOME/zsh/zsh_history"
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 setopt HIST_IGNORE_DUPS
 
 ###########AUTOCOMPLETION###########
@@ -62,15 +62,24 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+export FZF_DEFAULT_COMMAND="fd -H -I -t f -E '.cache'"
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+export FZF_CTRL_T_OPTS='--preview "bat --style=numbers --color=always --line-range :500 {}"'
+export FZF_ALT_C_COMMAND="find -type d"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 ###########PROMPT###########
 
 #colors for ps1
-SCHEME1="%{$(xcol -fg sel_fg -bg sel_bg)%}"
+S1="%{$(xcol -fg sel_fg -bg sel_bg)%}"
+S1INV="%{$(xcol -bg background -fg sel_bg)%}"
 RESET="%{$(tput sgr0)%}"
 
 #square ps1:
-export PS1="${SCHEME1}%~ $RESET "
+export PS1="${S1}%~${S1INV}$RESET "
 
 #gpg tty
 export GPG_TTY=$(tty)

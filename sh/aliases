@@ -8,9 +8,11 @@ alias pacman="sudo pacman"
 
 
 alias vim="nvim"
-alias v="nvim"
-alias ls='ls --color=auto'
-alias lsa='ls -A --color=auto'
+alias v="vim"
+alias hx="helix"
+alias lsa='ls --color=auto'
+alias ls='ls -A --color=auto'
+alias lsh='ls -lhA --color=auto'
 alias cp="cp -i"
 alias df='df -h'
 alias free='free -m'
@@ -33,3 +35,5 @@ alias a='cd $HOME/desktop/art/'
 alias s='cd $HOME/.scripts/'
 alias sst='cd $HOME/.scripts/status'
 alias rdb='cd $HOME/desktop/repos/dwmblocks'
+
+alias vf='cd && file="$(fzf --reverse --select-1 --preview "bat --style=numbers --color=always --line-range :500 {}")" && cd "${file%/*}" && nvim "$HOME/$file"'
