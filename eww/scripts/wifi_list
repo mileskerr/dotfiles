@@ -17,7 +17,6 @@ done
 sleep '0.1'
 
 cons="$(cat /tmp/eww-wifi-list-nmcli-output)"
-echo $cons
 rm "/tmp/eww-wifi-list-nmcli-output"
 
 result="{ \"loading\": [], \"list\": ["

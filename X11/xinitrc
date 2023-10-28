@@ -9,6 +9,7 @@ xrdb -merge $HOME/.config/X11/xresources
 xmodmap ~/.config/X11/xmodmap
 remap_keys
 ksp_alt_check &
+$HOME/.scripts/monitor/hdmi_poll &
 
 xrandr --setprovideroutputsource -0x1ff NVIDIA-0
 xrandr --auto

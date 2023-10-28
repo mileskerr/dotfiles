@@ -1,4 +1,6 @@
-theme = "nord"
+#theme = "nord2"
+#theme = "gruvbox"
+theme = "catppuccin_mocha"
 
 [editor]
 line-number = "relative"
@@ -29,6 +31,10 @@ j =   "move_char_left"
 k =   "move_visual_line_down"
 l =   "move_visual_line_up"
 ";" = "move_char_right"
+"A-j" =   "jump_view_left"
+"A-k" =   "jump_view_down"
+"A-l" =   "jump_view_up"
+"A-;" = "jump_view_right"
 h = "collapse_selection"
 "A-h" = "flip_selections"
 

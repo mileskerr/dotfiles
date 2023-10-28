@@ -1,8 +1,8 @@
 (deflisten workspaces_0 :initial ""
-    `xprop -spy -root _NET_CURRENT_DESKTOP | listener "get_workspaces eDP-1-0"`
+    `xprop -spy -root _NET_CURRENT_DESKTOP | listener "get_workspaces HDMI-0"`
 )
 (deflisten workspaces_1 :initial ""
-    `xprop -spy -root _NET_CURRENT_DESKTOP | listener "get_workspaces HDMI-0"`
+    `xprop -spy -root _NET_CURRENT_DESKTOP | listener "get_workspaces eDP-1-0"`
 )
 (defwidget xworkspaces [monitor]
     (literal
@@ -42,7 +42,7 @@
             :translate-y 3
             (label :text date-l1 )
         )
-        (label :text time-l2 )
+        (label :text date-l2 )
     )
 )
 

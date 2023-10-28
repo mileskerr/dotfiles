@@ -1,0 +1,12 @@
+#!/bin/sh
+
+monitors="$(tail -n 2 <<< "$(xrandr --listmonitors)" | awk '{print $4}')"
+
+result="["
+
+for mon in $monitors; do
+	result="$result\"$mon\","
+done
+
+printf "${result%,}]\n"
+
